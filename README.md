@@ -31,4 +31,3 @@ python -m http.server 4173 --directory dist/client
 ## Deploy
 
 `main` へのpushでGitHub Actionsが検証・ビルドし、`dist/client` をGitHub Pagesへ公開します。OpenAI Sites固有の設定は使用しません。
-

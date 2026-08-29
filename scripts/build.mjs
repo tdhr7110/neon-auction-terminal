@@ -14,4 +14,3 @@ await cp('public/characters-v2.png', 'dist/client/characters-v2.png');
 await cp('public/locations.png', 'dist/client/locations.png');
 await cp('public/items-v2.png', 'dist/client/items-v2.png');
 await cp('public/shop-items-v1.png', 'dist/client/shop-items-v1.png');
-

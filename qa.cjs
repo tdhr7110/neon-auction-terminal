@@ -84,4 +84,3 @@ async function metrics(page, requested) {
   console.error(error);
   process.exit(1);
 });
-

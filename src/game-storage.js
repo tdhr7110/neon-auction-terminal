@@ -178,4 +178,3 @@ export function resetSaves(storage = globalThis.localStorage) {
     return { ok: false, error: `保存データを削除できませんでした：${error?.message || '保存領域を確認してください'}` };
   }
 }
-

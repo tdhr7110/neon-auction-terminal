@@ -204,4 +204,3 @@ export const ENDINGS = {
 export const lotById = id => LOTS.find(lot => lot.id === id);
 export const npcById = id => NPCS.find(npc => npc.id === id);
 export const sourceById = id => SOURCES[id];
-

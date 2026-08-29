@@ -269,4 +269,3 @@ test('all-pass smoke route reaches a non-blocking cycle ending', () => {
   assert.equal(ending.state.ending.ok, false);
   assert.deepEqual(invariantErrors(ending.state), []);
 });
-

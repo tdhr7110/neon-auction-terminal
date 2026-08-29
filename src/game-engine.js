@@ -459,4 +459,3 @@ export function invariantErrors(state) {
   if (new Set(state.held.map(entry => entry.lotId)).size !== state.held.length) errors.push('held-duplicates');
   return errors;
 }
-
