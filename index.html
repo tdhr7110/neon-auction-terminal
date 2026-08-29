@@ -1,68 +1,23 @@
 <!doctype html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>NEON AUCTION</title>
-<style>
-:root{--bg:#070a10;--panel:#0d131c;--panel2:#111b27;--line:#243244;--text:#eaf0f6;--muted:#8799aa;--accent:#58e8db;--accent2:#b9fff8;--danger:#ff6b7b}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,"Noto Sans JP",system-ui,-apple-system,sans-serif}button{font:inherit}.app{width:min(100%,760px);height:100dvh;margin:auto;padding:calc(12px + env(safe-area-inset-top)) 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto 1fr auto;gap:8px;background:linear-gradient(180deg,rgba(88,232,219,.04),transparent 30%)}.top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em}.brand{font-weight:900}.tag{color:var(--accent);font-family:ui-monospace,monospace}.screen{display:none;min-height:0}.screen.active{display:grid}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:12px;font-weight:800}.btn.primary{border-color:rgba(88,232,219,.55);background:rgba(88,232,219,.11);color:var(--accent2)}.btn.danger{border-color:rgba(255,107,123,.45);color:#ffc6cd}.btn:disabled{opacity:.35}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}.muted{color:var(--muted)}
-#home{place-items:center}.homebox{width:100%;padding:24px;display:grid;gap:20px;text-align:center}.logo{font-size:clamp(32px,9vw,62px);font-weight:950;line-height:.92;letter-spacing:.08em}.subtitle{margin-top:10px;font-size:10px;color:var(--muted);letter-spacing:.2em}.homeactions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.homeactions .primary{grid-column:1/-1}.records{display:none;text-align:left;max-height:28vh;overflow:auto}.records.show{display:block}.record{display:flex;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--line);font-size:11px}
-#game{grid-template-rows:auto 1fr auto;gap:8px}.hud{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.hud>div{padding:8px 9px;background:var(--panel);border:1px solid var(--line);border-radius:10px}.k{font-size:9px;color:var(--muted);letter-spacing:.12em}.v{font-weight:900;margin-top:2px}.auction{padding:12px;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;min-height:0}.itemhead{display:flex;justify-content:space-between;gap:10px}.lot{font-size:9px;color:var(--accent);letter-spacing:.12em}.itemname{font-size:clamp(18px,5vw,27px);font-weight:950}.cat{font-size:9px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 7px;height:max-content}.intel{display:grid;grid-template-columns:1fr 1fr;gap:6px}.intel>div{padding:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px}.intel .v{font-size:12px}.bidders{display:grid;grid-template-rows:repeat(4,1fr);gap:5px;min-height:0}.bidder{display:grid;grid-template-columns:1fr auto;align-items:center;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#091019}.bidder.me{border-color:rgba(88,232,219,.35)}.bidder.out{opacity:.42}.bn{font-size:10px;font-weight:900}.bs{font-size:9px;color:var(--muted);margin-top:2px}.state{font-size:10px;text-align:right}.pricebox{text-align:center;border-top:1px solid var(--line);padding-top:7px}.price{font-size:clamp(28px,8vw,44px);font-weight:950;color:var(--accent2);line-height:1}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.status{text-align:center;min-height:16px;font-size:9px;color:var(--muted);margin-top:4px}
-.overlay{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,4,8,.84);backdrop-filter:blur(8px)}.overlay.show{display:flex}.modal{width:min(100%,620px);max-height:calc(100dvh - 32px);overflow:auto;padding:18px;display:grid;gap:11px}.modal h2{margin:0;font-size:19px}.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.resultgrid>div{padding:9px;border:1px solid var(--line);border-radius:9px}.shopgrid{display:grid;gap:7px}.shopcard{padding:11px;border:1px solid var(--line);background:var(--panel2);border-radius:10px}.shopname{font-weight:900;color:var(--accent2)}.shopdesc{margin-top:4px;font-size:10px;color:var(--muted);line-height:1.45}.score{font-size:42px;text-align:center;font-weight:950;color:var(--accent2)}.foot{text-align:center;font-size:8px;color:#536171;letter-spacing:.12em}
-@media(max-height:680px){.app{padding-top:7px;padding-bottom:7px;gap:5px}.auction{padding:8px;gap:5px}.hud>div,.intel>div,.bidder{padding:5px 7px}.btn{padding:9px}.price{font-size:27px}.itemname{font-size:18px}.modal{padding:13px}}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="top"><div class="brand">NEON AUCTION</div><div class="tag">UNDERCITY / 2097</div></header>
-<main id="home" class="screen active"><section class="homebox panel">
-<div><div class="logo">NEON<br>AUCTION</div><div class="subtitle">BLACK MARKET TERMINAL</div></div>
-<div class="homeactions"><button id="continueBtn" class="btn primary">続きから</button><button id="newBtn" class="btn">新規</button><button id="recordsBtn" class="btn">競売記録</button></div>
-<div id="records" class="records"></div>
-</section></main>
-<main id="game" class="screen">
-<section class="hud"><div><div class="k">ROUND</div><div id="round" class="v mono">01/10</div></div><div><div class="k">CREDIT</div><div id="cash" class="v mono">1,200</div></div><div><div class="k">ASSETS</div><div id="assets" class="v mono">0</div></div></section>
-<section class="auction panel">
-<div class="itemhead"><div><div id="lot" class="lot mono">LOT-01</div><div id="item" class="itemname">---</div></div><div id="cat" class="cat">---</div></div>
-<div class="intel"><div><div class="k">MARKET EST.</div><div id="estimate" class="v mono">---</div></div><div><div class="k">NEXT SIGNAL</div><div id="nextSignal" class="v">LOCKED</div></div></div>
-<div id="bidders" class="bidders"></div>
-<div class="pricebox"><div class="k">CURRENT BID</div><div id="price" class="price mono">0 CR</div></div>
-</section>
-<section><div class="actions"><button id="bidBtn" class="btn primary">入札</button><button id="foldBtn" class="btn danger">撤退</button></div><div id="status" class="status">市場シグナルを読め。</div></section>
-</main>
-<footer class="foot">P!P!P! / GITHUB BUILD</footer>
-</div>
-<div id="resultOverlay" class="overlay"><section class="modal panel"><h2 id="resultTitle">RESULT</h2><div class="resultgrid"><div><div class="k">HAMMER PRICE</div><div id="hammer" class="v mono">0</div></div><div><div class="k">TRUE VALUE</div><div id="trueValue" class="v mono">0</div></div></div><div id="resultDetail" class="muted" style="font-size:11px;line-height:1.5"></div><button id="nextBtn" class="btn primary">次へ</button></section></div>
-<div id="shopOverlay" class="overlay"><section class="modal panel"><div><div class="tag">CYBER SHOP</div><h2>能力を1つ選択</h2></div><div id="shopGrid" class="shopgrid"></div><button id="shopSkip" class="btn">見送る</button></section></div>
-<div id="endOverlay" class="overlay"><section class="modal panel"><h2 style="text-align:center">AUCTION COMPLETE</h2><div id="finalScore" class="score mono">0</div><div class="resultgrid"><div><div class="k">CASH</div><div id="finalCash" class="v mono"></div></div><div><div class="k">ASSET VALUE</div><div id="finalAssets" class="v mono"></div></div><div><div class="k">SET BONUS</div><div id="finalBonus" class="v mono"></div></div><div><div class="k">LOTS WON</div><div id="finalLots" class="v mono"></div></div></div><button id="homeBtn" class="btn primary">ターミナルへ戻る</button></section></div>
-<script>
-const ITEMS=[
-['VOID GLASS','旧文明遺物',240,90],['SYNAPSE KEY','未公開技術',360,130],['RED ARCHIVE','禁制情報',190,75],['ORBITAL SEED','生体資産',430,150],['GHOST CORE','未公開技術',520,170],['WHITE RELIC','旧文明遺物',300,110],['BLACK PASSPORT','禁制情報',260,95],['MIMIC ORGAN','生体資産',380,135],['NULL CROWN','旧文明遺物',610,190],['LAST PROTOCOL','禁制情報',700,210]
-].map(x=>({name:x[0],cat:x[1],value:x[2],spread:x[3]}));
-const NPCS=[{id:'kane',name:'KANE-7',style:'規律型',aggr:.80},{id:'mira',name:'MIRA',style:'相場型',aggr:.92},{id:'dogma',name:'DOGMA',style:'熱狂型',aggr:1.08}];
-const ABILITIES=[{id:'optic',name:'OPTIC SCANNER',desc:'市場推定レンジを狭める。'},{id:'prediction',name:'PREDICTION CHIP',desc:'NPCの入札熱量を表示する。'},{id:'market',name:'MARKET EYE',desc:'次の商品カテゴリを先読みする。'},{id:'deep',name:'DEEP SCAN',desc:'真価に近い解析値を追加表示する。'}];
-const SAVE='neon-auction-save-v1',REC='neon-auction-records-v1';let S=null;const $=id=>document.getElementById(id),money=n=>Math.round(n).toLocaleString('ja-JP'),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-function fresh(){return{round:0,cash:1200,inventory:[],abilities:[],history:[],auction:null,finished:false}}
-function save(){localStorage.setItem(SAVE,JSON.stringify(S));updateContinue()}
-function load(){try{return JSON.parse(localStorage.getItem(SAVE))}catch{return null}}
-function screen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active')}
-function updateContinue(){const s=load();$('continueBtn').disabled=!s||s.finished}
-function inc(p){return p<200?20:p<450?30:p<800?50:80}
-function buildAuction(){const item=ITEMS[S.round],start=Math.max(40,Math.round(item.value*.28/10)*10);const npcs=NPCS.map((n,i)=>{const factor=.76+(((S.round+1)*(i+3)*17)%31)/100,maxBid=Math.round(item.value*n.aggr*factor);return{...n,active:true,maxBid,heat:maxBid>item.value*1.02?'HIGH':maxBid>item.value*.78?'MID':'LOW'}});S.auction={itemIndex:S.round,currentBid:start,leader:null,playerActive:true,npcs,done:false};save();render()}
-function estimate(item){let w=item.spread;if(S.abilities.includes('optic'))w*=.58;const c=item.value+Math.sin((S.round+1)*3.17)*w*.28;return[Math.max(40,Math.round(c-w)),Math.round(c+w)]}
-function render(){const a=S.auction,item=ITEMS[a.itemIndex];$('round').textContent=String(S.round+1).padStart(2,'0')+'/10';$('cash').textContent=money(S.cash);$('assets').textContent=money(S.inventory.reduce((s,x)=>s+x.value,0));$('lot').textContent='LOT-'+String(S.round+1).padStart(2,'0');$('item').textContent=item.name;$('cat').textContent=item.cat;const [lo,hi]=estimate(item),deep=S.abilities.includes('deep')?' / SCAN '+money(item.value+Math.round(Math.cos((S.round+2)*2.1)*item.spread*.15)):'';$('estimate').textContent=money(lo)+'–'+money(hi)+' CR'+deep;$('nextSignal').textContent=S.abilities.includes('market')&&S.round<9?ITEMS[S.round+1].cat:'SIGNAL LOCKED';$('price').textContent=money(a.currentBid)+' CR';const rows=[{id:'you',name:'YOU',style:'PLAYER',active:a.playerActive,heat:'—'},...a.npcs];$('bidders').innerHTML=rows.map(r=>`<div class="bidder ${r.id==='you'?'me':''} ${r.active?'':'out'}"><div><div class="bn">${r.name}</div><div class="bs">${r.style}</div></div><div class="state mono">${r.active?(a.leader===r.id?'LEAD':(S.abilities.includes('prediction')&&r.id!=='you'?'HEAT '+r.heat:'ACTIVE')):'OUT'}</div></div>`).join('');const next=a.currentBid+inc(a.currentBid);$('bidBtn').textContent='入札 +'+money(inc(a.currentBid))+' CR';$('bidBtn').disabled=!a.playerActive||next>S.cash||a.done;$('foldBtn').disabled=!a.playerActive||a.done}
-function npcRespond(){const a=S.auction;for(const n of a.npcs){if(!n.active||n.id===a.leader)continue;const next=a.currentBid+inc(a.currentBid);if(next>n.maxBid){n.active=false;continue}const pressure=(n.maxBid-next)/Math.max(1,n.maxBid),roll=((S.round+1)*37+next*7+n.id.charCodeAt(0)*13)%100/100;if(roll<clamp(.34+pressure*.62,.34,.94)){a.currentBid=next;a.leader=n.id}else if(next>n.maxBid*.9)n.active=false}resolve();save();render()}
-function bid(){const a=S.auction;if(a.done||!a.playerActive)return;const next=a.currentBid+inc(a.currentBid);if(next>S.cash)return;a.currentBid=next;a.leader='you';$('status').textContent='BID ACCEPTED';npcRespond()}
-function fold(){const a=S.auction;if(a.done)return;a.playerActive=false;if(a.leader==='you')a.leader=null;let active=a.npcs.filter(n=>n.active);if(active.length){active.sort((x,y)=>y.maxBid-x.maxBid);const winner=active[0];a.leader=winner.id;a.currentBid=Math.min(winner.maxBid,Math.max(a.currentBid,a.currentBid+inc(a.currentBid)));active.slice(1).forEach(n=>n.active=false)}finishAuction();save();render()}
-function resolve(){const a=S.auction,active=a.npcs.filter(n=>n.active);if(a.playerActive&&a.leader==='you'&&active.every(n=>a.currentBid+inc(a.currentBid)>n.maxBid)){active.forEach(n=>n.active=false);return finishAuction()}if(!a.playerActive&&active.length<=1)return finishAuction();if(a.playerActive&&active.length===0)return finishAuction();if(a.leader!=='you'){const leader=a.npcs.find(n=>n.id===a.leader);if(leader&&a.currentBid+inc(a.currentBid)>leader.maxBid&&active.length===1)return finishAuction()}}
-function finishAuction(){const a=S.auction;if(a.done)return;a.done=true;const item=ITEMS[a.itemIndex],won=a.leader==='you'&&a.playerActive;if(won){S.cash-=a.currentBid;S.inventory.push({...item,price:a.currentBid,round:S.round+1})}const winner=won?'YOU':(NPCS.find(n=>n.id===a.leader)?.name||'NO SALE');S.history.push({round:S.round+1,item:item.name,price:a.currentBid,value:item.value,winner,won});$('resultTitle').textContent=won?'LOT ACQUIRED':'LOT LOST';$('hammer').textContent=money(a.currentBid)+' CR';$('trueValue').textContent=money(item.value)+' CR';$('resultDetail').innerHTML=`落札者: <b>${winner}</b>${won?`<br>評価差額: <b class="mono">${item.value-a.currentBid>=0?'+':''}${money(item.value-a.currentBid)} CR</b>`:''}<br>保有能力: ${S.abilities.length?S.abilities.join(' / '):'NONE'}`;$('resultOverlay').classList.add('show');save()}
-function nextRound(){$('resultOverlay').classList.remove('show');if(S.round>=9)return endGame();S.round++;if(S.round%3===0)return shop();buildAuction()}
-function shop(){let choices=ABILITIES.filter(a=>!S.abilities.includes(a.id));if(choices.length<3)choices=ABILITIES;choices=choices.slice(0,3);$('shopGrid').innerHTML=choices.map(a=>`<button class="shopcard btn" data-id="${a.id}"><div class="shopname">${a.name}</div><div class="shopdesc">${a.desc}</div></button>`).join('');document.querySelectorAll('.shopcard').forEach(el=>el.onclick=()=>{if(!S.abilities.includes(el.dataset.id))S.abilities.push(el.dataset.id);$('shopOverlay').classList.remove('show');buildAuction()});$('shopOverlay').classList.add('show');save()}
-function bonus(){const c={};for(const x of S.inventory)c[x.cat]=(c[x.cat]||0)+1;let b=0;Object.values(c).forEach(n=>{if(n>=2)b+=100;if(n>=3)b+=150;if(n>=4)b+=250});return b}
-function endGame(){S.finished=true;const assets=S.inventory.reduce((s,x)=>s+x.value,0),b=bonus(),score=S.cash+assets+b;$('finalScore').textContent=money(score);$('finalCash').textContent=money(S.cash);$('finalAssets').textContent=money(assets);$('finalBonus').textContent=money(b);$('finalLots').textContent=S.inventory.length+'/10';$('endOverlay').classList.add('show');const rec=JSON.parse(localStorage.getItem(REC)||'[]');rec.unshift({date:new Date().toISOString(),score,lots:S.inventory.length});localStorage.setItem(REC,JSON.stringify(rec.slice(0,12)));save()}
-function start(){S=fresh();screen('game');buildAuction()}function cont(){const s=load();if(!s||s.finished)return;S=s;screen('game');render()}function home(){document.querySelectorAll('.overlay').forEach(x=>x.classList.remove('show'));screen('home');updateContinue();renderRecords()}function renderRecords(){const rec=JSON.parse(localStorage.getItem(REC)||'[]');$('records').innerHTML=rec.length?rec.map(r=>`<div class="record"><span>${new Date(r.date).toLocaleDateString('ja-JP')} / ${r.lots} LOTS</span><b class="mono">${money(r.score)} CR</b></div>`).join(''):'<div class="muted" style="font-size:11px">記録はまだありません。</div>'}
-$('newBtn').onclick=start;$('continueBtn').onclick=cont;$('recordsBtn').onclick=()=>{$('records').classList.toggle('show');renderRecords()};$('bidBtn').onclick=bid;$('foldBtn').onclick=fold;$('nextBtn').onclick=nextRound;$('shopSkip').onclick=()=>{$('shopOverlay').classList.remove('show');buildAuction()};$('homeBtn').onclick=home;updateContinue();renderRecords();
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0D10" />
+    <title>NEON AUCTION</title>
+    <meta name="description" content="証拠と競合心理を読む、灰雨避難事件のオークション推理ゲーム。" />
+    <link rel="canonical" href="https://tdhr7110.github.io/neon-auction-terminal/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NEON AUCTION" />
+    <meta property="og:description" content="証拠を読み、競合心理と相場を見抜くオークション推理ゲーム。" />
+    <meta property="og:url" content="https://tdhr7110.github.io/neon-auction-terminal/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./src/style-v35.css?v=37" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./src/game-v35.js?v=37"></script>
+  </body>
 </html>
+

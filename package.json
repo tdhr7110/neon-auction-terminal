@@ -1,0 +1,19 @@
+{
+  "name": "neon-auction",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/game-v35.js && node --check src/game-engine.js && node --check src/game-storage.js && node --check src/slice-data.js",
+    "qa": "node qa.cjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.1",
+    "vite": "^7.1.3"
+  }
+}
+
